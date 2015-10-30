@@ -119,6 +119,9 @@ REG   Rec_Pointer     Next_Record;
       REG One_Fifty   Int_Index_Proc8;
       REG One_Fifty   Int_Loc_Proc8;
       int             Int_2_Par_Val_Proc8;
+
+//### this comes from Func_3
+      Enumeration     Enum_Loc_Func3;
 //#LIS# End LIS Modification -- Local variables that are made global
 
 

@@ -50,6 +50,8 @@ extern  int           Int_2_Par_Val_Proc8;
 extern  REG One_Fifty Int_Index_Proc8;
 extern  REG One_Fifty Int_Loc_Proc8;
 
+//Func_3()
+extern  Enumeration   Enum_Loc_Func3;
 //#LIS# End LIS Modification
 
 //#LIS# Start LIS Modification
@@ -64,7 +66,10 @@ Proc_6()
 //#LIS# End LIS Modification
 {
   *Enum_Ref_Par = Enum_Val_Par;
-  if (! Func_3 (Enum_Val_Par))
+  //#LIS# Start LIS Modification
+  //if (! Func_3 (Enum_Val_Par))
+  if (! Func_3 ())
+  //#LIS# End LIS Modification    
     /* then, not executed */
     *Enum_Ref_Par = Ident_4;
   switch (Enum_Val_Par)
@@ -210,17 +215,24 @@ Str_30  Str_2_Par_Ref;
   } /* if Ch_Loc */
 } /* Func_2 */
 
-
-Boolean Func_3 (Enum_Par_Val)
+//#LIS# Start LIS Modficiation
+//Boolean Func_3 (Enum_Par_Val)
+Boolean Func_3 ()
 /***************************/
     /* executed once        */
     /* Enum_Par_Val == Ident_3 */
-Enumeration Enum_Par_Val;
+//Enumeration Enum_Par_Val;
+//#LIS# End LIS Modficiation
 {
-  Enumeration Enum_Loc;
+  //#LIS# Start LIS Modification
+  //Enumeration Enum_Loc;   //this has been made global
+  //#LIS# End LIS Modification
 
-  Enum_Loc = Enum_Par_Val;
-  if (Enum_Loc == Ident_3)
+  //#LIS# Start LIS Modification
+  //Enum_Loc_Func3 = Enum_Par_Val;
+  Enum_Loc_Func3 = Enum_Val_Par;
+  //#LIS# End LIS Modification
+  if (Enum_Loc_Func3 == Ident_3)
     /* then, executed */
     return (true);
   else /* not executed */
