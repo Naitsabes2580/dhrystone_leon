@@ -84,13 +84,16 @@ REG   char            Ch_Index;
 REG   int             Run_Index;
 REG   int             Number_Of_Runs;
 
-//###this comes from Proc_1
+//### this comes from Proc_1
 REG   Rec_Pointer     Next_Record;
 
-//###this comes from Proc_2
+//### this comes from Proc_2
       One_Fifty       *Int_Par_Ref;
       One_Fifty       Int_Loc;  
       Enumeration     Enum_Loc_2;
+
+//### this comes from Proc_3
+      Rec_Pointer     *Ptr_Ref_Par;
 //#LIS# End LIS Modification -- Local variables that are made global
 
 
@@ -353,7 +356,11 @@ Proc_1 () //### no parameters, as only global variables are used
   //Next_Record->Ptr_Comp = Ptr_Val_Par->Ptr_Comp;
   Next_Record->Ptr_Comp = Ptr_Glob->Ptr_Comp;
   //#LIS# End LIS Modification
-  Proc_3 (&Next_Record->Ptr_Comp);
+  //#LIS# Start LIS Modification
+  //Proc_3 (&Next_Record->Ptr_Comp);
+  Ptr_Ref_Par = &Next_Record->Ptr_Comp;
+  Proc_3();
+  //#LIS# End LIS Modification
     /* Ptr_Val_Par->Ptr_Comp->Ptr_Comp 
                         == Ptr_Glob->Ptr_Comp */
   if (Next_Record->Discr == Ident_1)
@@ -405,13 +412,15 @@ Proc_2()
 } /* Proc_2 */
 
 
-Proc_3 (Ptr_Ref_Par)
+//#LIS# Start LIS Modification
+//Proc_3 (Ptr_Ref_Par)
+Proc_3()
 /******************/
     /* executed once */
     /* Ptr_Ref_Par becomes Ptr_Glob */
 
-Rec_Pointer *Ptr_Ref_Par;
-
+//Rec_Pointer *Ptr_Ref_Par;   // this has been made global
+//#LIS# End LIS Modification
 {
   if (Ptr_Glob != Null)
     /* then, executed */
