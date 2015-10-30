@@ -30,6 +30,7 @@ int             Arr_2_Glob [50] [50];
 //#LIS# Start LIS Modification
 //extern char     *malloc ();
 //#LIS# End LIS Modification
+
 Enumeration     Func_1 ();
   /* forward declaration necessary since Enumeration may not simply be int */
 
@@ -72,6 +73,26 @@ float           Microseconds,
 
 /* end of variables for time measurement */
 
+//#LIS# Start LIS Modification -- Local variables that are made global
+      One_Fifty       Int_1_Loc;
+REG   One_Fifty       Int_2_Loc;
+      One_Fifty       Int_3_Loc;
+REG   char            Ch_Index;
+      Enumeration     Enum_Loc;
+      Str_30          Str_1_Loc; 
+      Str_30          Str_2_Loc;
+REG   int             Run_Index;
+REG   int             Number_Of_Runs;
+
+//###this comes from Proc_1
+REG   Rec_Pointer     Next_Record;
+
+//###this comes from Proc_2
+      One_Fifty       *Int_Par_Ref;
+      One_Fifty       Int_Loc;  
+      Enumeration     Enum_Loc_2;
+//#LIS# End LIS Modification -- Local variables that are made global
+
 
 main ()
 /*****/
@@ -79,16 +100,18 @@ main ()
   /* main program, corresponds to procedures        */
   /* Main and Proc_0 in the Ada version             */
 {
-        One_Fifty       Int_1_Loc;
-  REG   One_Fifty       Int_2_Loc;
-        One_Fifty       Int_3_Loc;
-  REG   char            Ch_Index;
-        Enumeration     Enum_Loc;
-        Str_30          Str_1_Loc;
-        Str_30          Str_2_Loc;
-  REG   int             Run_Index;
-  REG   int             Number_Of_Runs;
-
+  //#LIS# Start LIS Modification
+        //One_Fifty       Int_1_Loc;
+  
+  //REG   One_Fifty       Int_2_Loc;
+  //      One_Fifty       Int_3_Loc;
+  //REG   char            Ch_Index;
+  //      Enumeration     Enum_Loc;
+  //      Str_30          Str_1_Loc;
+  //      Str_30          Str_2_Loc;
+  //REG   int             Run_Index;
+  //REG   int             Number_Of_Runs;
+  //#LIS# End LIS Modification
   /* Initializations */
 
   Next_Ptr_Glob = (Rec_Pointer) malloc (sizeof (Rec_Type));
@@ -169,7 +192,10 @@ main ()
       /* Int_1_Loc == 3, Int_2_Loc == 3, Int_3_Loc == 7 */
     Proc_8 (Arr_1_Glob, Arr_2_Glob, Int_1_Loc, Int_3_Loc);
       /* Int_Glob == 5 */
-    Proc_1 (Ptr_Glob);
+    //#LIS# Start LIS Modification
+    //Proc_1 (Ptr_Glob);
+    Proc_1 ();
+    //#LIS# End LIS Modification
     for (Ch_Index = 'A'; Ch_Index <= Ch_2_Glob; ++Ch_Index)
                              /* loop body executed twice */
     {
@@ -187,7 +213,12 @@ main ()
     Int_1_Loc = Int_2_Loc / Int_3_Loc;
     Int_2_Loc = 7 * (Int_2_Loc - Int_3_Loc) - Int_1_Loc;
       /* Int_1_Loc == 1, Int_2_Loc == 13, Int_3_Loc == 7 */
-    Proc_2 (&Int_1_Loc);
+    
+    //#LIS# Start LIS Modification
+    //Proc_2 (&Int_1_Loc);
+    Int_Par_Ref = &Int_1_Loc;    
+    Proc_2();
+    //#LIS# End LIS Modification
       /* Int_1_Loc == 5 */
 
   } /* loop "for Run_Index" */
@@ -289,23 +320,39 @@ main ()
   
 }
 
+//#LIS# Start LIS Modification
+//Proc_1 (Ptr_Val_Par)
+Proc_1 () //### no parameters, as only global variables are used
 
-Proc_1 (Ptr_Val_Par)
 /******************/
-
-REG Rec_Pointer Ptr_Val_Par;
+//REG Rec_Pointer Ptr_Val_Par;  //###equivalent to Ptr_Glob
     /* executed once */
+//#LIS# End LIS Modification
 {
-  REG Rec_Pointer Next_Record = Ptr_Val_Par->Ptr_Comp;  
+  //#LIS# Start LIS Modification
+  //REG Rec_Pointer Next_Record = Ptr_Val_Par->Ptr_Comp;  
+  Next_Record = Ptr_Glob->Ptr_Comp;  
+  //#LIS# End LIS Modification
                                         /* == Ptr_Glob_Next */
   /* Local variable, initialized with Ptr_Val_Par->Ptr_Comp,    */
   /* corresponds to "rename" in Ada, "with" in Pascal           */
   
-  structassign (*Ptr_Val_Par->Ptr_Comp, *Ptr_Glob); 
-  Ptr_Val_Par->variant.var_1.Int_Comp = 5;
-  Next_Record->variant.var_1.Int_Comp 
-        = Ptr_Val_Par->variant.var_1.Int_Comp;
-  Next_Record->Ptr_Comp = Ptr_Val_Par->Ptr_Comp;
+  //#LIS# Start LIS Modification
+  //structassign (*Ptr_Val_Par->Ptr_Comp, *Ptr_Glob); 
+  structassign (*Ptr_Glob->Ptr_Comp, *Ptr_Glob); 
+  //#LIS# End LIS Modification
+  //#LIS# Start LIS Modification
+  //Ptr_Val_Par->variant.var_1.Int_Comp = 5;
+  Ptr_Glob->variant.var_1.Int_Comp = 5;
+  //#LIS# End LIS Modification
+  //#LIS# Start LIS Modification
+  //Next_Record->variant.var_1.Int_Comp = Ptr_Val_Par->variant.var_1.Int_Comp;
+  Next_Record->variant.var_1.Int_Comp = Ptr_Glob->variant.var_1.Int_Comp;
+  //#LIS# End LIS Modification
+  //#LIS# Start LIS Modification
+  //Next_Record->Ptr_Comp = Ptr_Val_Par->Ptr_Comp;
+  Next_Record->Ptr_Comp = Ptr_Glob->Ptr_Comp;
+  //#LIS# End LIS Modification
   Proc_3 (&Next_Record->Ptr_Comp);
     /* Ptr_Val_Par->Ptr_Comp->Ptr_Comp 
                         == Ptr_Glob->Ptr_Comp */
@@ -313,26 +360,37 @@ REG Rec_Pointer Ptr_Val_Par;
     /* then, executed */
   {
     Next_Record->variant.var_1.Int_Comp = 6;
-    Proc_6 (Ptr_Val_Par->variant.var_1.Enum_Comp, 
+    //#LIS# Start LIS Modification
+    /* Proc_6 (Ptr_Val_Par->variant.var_1.Enum_Comp, 
+           &Next_Record->variant.var_1.Enum_Comp); */
+    Proc_6 (Ptr_Glob->variant.var_1.Enum_Comp, 
            &Next_Record->variant.var_1.Enum_Comp);
+    //#LIS# End LIS Modification
     Next_Record->Ptr_Comp = Ptr_Glob->Ptr_Comp;
     Proc_7 (Next_Record->variant.var_1.Int_Comp, 10, 
            &Next_Record->variant.var_1.Int_Comp);
   }
   else /* not executed */
-    structassign (*Ptr_Val_Par, *Ptr_Val_Par->Ptr_Comp);
+    //#LIS# Start LIS Modification
+    //structassign (*Ptr_Val_Par, *Ptr_Val_Par->Ptr_Comp);
+    structassign (*Ptr_Glob, *Ptr_Glob->Ptr_Comp);
+    //#LIS# End LIS Modification
 } /* Proc_1 */
 
-
-Proc_2 (Int_Par_Ref)
+//#LIS# Start LIS Modification
+//Proc_2 (Int_Par_Ref)
+Proc_2()
 /******************/
     /* executed once */
     /* *Int_Par_Ref == 1, becomes 4 */
 
-One_Fifty   *Int_Par_Ref;
+//One_Fifty   *Int_Par_Ref;   // this has been made global
+//#LIS# End LIS Modification
 {
-  One_Fifty  Int_Loc;  
-  Enumeration   Enum_Loc;
+  //#LIS# Start LIS Modification
+  //One_Fifty     Int_Loc;  
+  //Enumeration   Enum_Loc;
+  //#LIS# End LIS Modification
 
   Int_Loc = *Int_Par_Ref + 10;
   do /* executed once */
@@ -341,9 +399,9 @@ One_Fifty   *Int_Par_Ref;
     {
       Int_Loc -= 1;
       *Int_Par_Ref = Int_Loc - Int_Glob;
-      Enum_Loc = Ident_1;
+      Enum_Loc_2 = Ident_1;
     } /* if */
-  while (Enum_Loc != Ident_1); /* true */
+  while (Enum_Loc_2 != Ident_1); /* true */
 } /* Proc_2 */
 
 

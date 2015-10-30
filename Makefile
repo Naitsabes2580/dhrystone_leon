@@ -24,8 +24,8 @@ PROGS=		unix			# Programs to build (UNIX)
 #TIME_FUNC=	-DMSC_CLOCK		# Use Microsoft clock() for measurement
 #TIME_FUNC=	-DTIME			# Use time(2) for measurement
 TIME_FUNC=	-DTIMES			# Use times(2) for measurement
-#HZ=		50			# Frequency of times(2) clock ticks
-HZ=		60			# Frequency of times(2) clock ticks
+HZ=		50			# Frequency of times(2) clock ticks
+#HZ=		60			# Frequency of times(2) clock ticks
 #HZ=		100			# Frequency of times(2) clock ticks
 #HZ=		1			# Give bogus result unless changed!
 
@@ -49,8 +49,10 @@ GCCFLAGS= $(GCCOPTIM) $(TIME_FUNC) -DHZ=$(HZ) $(ENUMS) $(STRUCTASSIGN) $(CFL)
 #
 SRC=		dhry_1.c dhry_2.c
 HDR=		dhry.h
-
-UNIX_PROGS=	cc_dry2 cc_dry2reg gcc_dry2 gcc_dry2reg
+##LIS# Start LIS Modification
+#UNIX_PROGS=	cc_dry2 cc_dry2reg gcc_dry2 gcc_dry2reg
+UNIX_PROGS = gcc_dry2
+##LIS# End LIS Modification
 MSC_PROGS=	sdry2.exe sdry2reg.exe mdry2.exe mdry2reg.exe \
 		ldry2.exe ldry2reg.exe cdry2.exe cdry2reg.exe \
 		hdry2.exe hdry2reg.exe
