@@ -113,6 +113,12 @@ REG   Rec_Pointer     Next_Record;
       One_Fifty       Int_2_Par_Val_Proc7;
       One_Fifty       *Int_Par_Ref_Proc7;
       One_Fifty       Int_Loc_Proc7;
+
+//### this comes from Proc_8
+      int             Int_1_Par_Val_Proc8;
+      REG One_Fifty   Int_Index_Proc8;
+      REG One_Fifty   Int_Loc_Proc8;
+      int             Int_2_Par_Val_Proc8;
 //#LIS# End LIS Modification -- Local variables that are made global
 
 
@@ -218,7 +224,12 @@ main ()
       Int_1_Loc += 1;
     } /* while */
       /* Int_1_Loc == 3, Int_2_Loc == 3, Int_3_Loc == 7 */
-    Proc_8 (Arr_1_Glob, Arr_2_Glob, Int_1_Loc, Int_3_Loc);
+    //#LIS# Start LIS Modification
+    //Proc_8 (Arr_1_Glob, Arr_2_Glob, Int_1_Loc, Int_3_Loc);
+    Int_1_Par_Val_Proc8 = Int_1_Loc;
+    Int_2_Par_Val_Proc8 = Int_3_Loc;
+    Proc_8 ();
+    //#LIS# End LIS Modification
       /* Int_Glob == 5 */
     //#LIS# Start LIS Modification
     //Proc_1 (Ptr_Glob);

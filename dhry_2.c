@@ -40,6 +40,16 @@ extern  Enumeration   *Enum_Ref_Par;
 extern  One_Fifty     Int_1_Par_Val_Proc7;
 extern  One_Fifty     Int_2_Par_Val_Proc7;
 extern  One_Fifty     *Int_Par_Ref_Proc7;
+extern  One_Fifty     Int_Loc_Proc7;
+
+//Proc_8
+extern  int           Arr_1_Glob [50];
+extern  int           Arr_2_Glob [50] [50];
+extern  int           Int_1_Par_Val_Proc8;
+extern  int           Int_2_Par_Val_Proc8;
+extern  REG One_Fifty Int_Index_Proc8;
+extern  REG One_Fifty Int_Loc_Proc8;
+
 //#LIS# End LIS Modification
 
 //#LIS# Start LIS Modification
@@ -94,34 +104,41 @@ Proc_7 (Int_Par_Ref)
 //One_Fifty      *Int_Par_Ref;      //this has been made global
 //#LIS# End LIS Modification
 {
-  One_Fifty Int_Loc;
+  //#LIS# Start LIS Modification
+  //One_Fifty Int_Loc_Proc7;        //this has been made global
 
-  Int_Loc = Int_1_Par_Val_Proc7 + 2;
-  *Int_Par_Ref_Proc7 = Int_2_Par_Val_Proc7 + Int_Loc;
+  Int_Loc_Proc7 = Int_1_Par_Val_Proc7 + 2;
+  *Int_Par_Ref_Proc7 = Int_2_Par_Val_Proc7 + Int_Loc_Proc7;
+  //#LIS# End LIS Modification
 } /* Proc_7 */
 
 
-Proc_8 (Arr_1_Par_Ref, Arr_2_Par_Ref, Int_1_Par_Val, Int_2_Par_Val)
+//#LIS# Start LIS Modification
+//Proc_8 (Arr_1_Par_Ref, Arr_2_Par_Ref, Int_1_Par_Val, Int_2_Par_Val)
+  Proc_8 ()
 /*********************************************************************/
     /* executed once      */
     /* Int_Par_Val_1 == 3 */
     /* Int_Par_Val_2 == 7 */
-Arr_1_Dim       Arr_1_Par_Ref;
-Arr_2_Dim       Arr_2_Par_Ref;
-int             Int_1_Par_Val;
-int             Int_2_Par_Val;
+//Arr_1_Dim       Arr_1_Par_Ref;  //this has been made global
+//Arr_2_Dim       Arr_2_Par_Ref;  //this has been made global
+//int             Int_1_Par_Val;
+//int             Int_2_Par_Val;
+//#LIS# End LIS Modification
 {
-  REG One_Fifty Int_Index;
-  REG One_Fifty Int_Loc;
+  //#LIS# Start LIS Modification
+  //REG One_Fifty Int_Index;      //this has been made global
+  //REG One_Fifty Int_Loc;        //this has been made global
+  //#LIS# End LIS Modification
 
-  Int_Loc = Int_1_Par_Val + 5;
-  Arr_1_Par_Ref [Int_Loc] = Int_2_Par_Val;
-  Arr_1_Par_Ref [Int_Loc+1] = Arr_1_Par_Ref [Int_Loc];
-  Arr_1_Par_Ref [Int_Loc+30] = Int_Loc;
-  for (Int_Index = Int_Loc; Int_Index <= Int_Loc+1; ++Int_Index)
-    Arr_2_Par_Ref [Int_Loc] [Int_Index] = Int_Loc;
-  Arr_2_Par_Ref [Int_Loc] [Int_Loc-1] += 1;
-  Arr_2_Par_Ref [Int_Loc+20] [Int_Loc] = Arr_1_Par_Ref [Int_Loc];
+  Int_Loc_Proc8 = Int_1_Par_Val_Proc8 + 5;
+  Arr_1_Glob [Int_Loc_Proc8] = Int_2_Par_Val_Proc8;
+  Arr_1_Glob [Int_Loc_Proc8+1] = Arr_1_Glob [Int_Loc_Proc8];
+  Arr_1_Glob [Int_Loc_Proc8+30] = Int_Loc_Proc8;
+  for (Int_Index_Proc8 = Int_Loc_Proc8; Int_Index_Proc8 <= Int_Loc_Proc8+1; ++Int_Index_Proc8)
+    Arr_2_Glob [Int_Loc_Proc8] [Int_Index_Proc8] = Int_Loc_Proc8;
+  Arr_2_Glob [Int_Loc_Proc8] [Int_Loc_Proc8-1] += 1;
+  Arr_2_Glob [Int_Loc_Proc8+20] [Int_Loc_Proc8] = Arr_1_Glob [Int_Loc_Proc8];
   Int_Glob = 5;
 } /* Proc_8 */
 
