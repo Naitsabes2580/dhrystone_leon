@@ -14,6 +14,12 @@
  *
  ****************************************************************************
  */
+ /*
+ *#LIS#
+ *Modified by Sebastian Kroesche
+ *Date: 30.10.2015
+ *Description: Replaced local variables by global variables
+*/
 
 #include "dhry.h"
 
@@ -94,6 +100,9 @@ REG   Rec_Pointer     Next_Record;
 
 //### this comes from Proc_3
       Rec_Pointer     *Ptr_Ref_Par;
+
+//### this comes from Proc_4
+      Boolean         Bool_Loc;
 //#LIS# End LIS Modification -- Local variables that are made global
 
 
@@ -433,7 +442,9 @@ Proc_4 () /* without parameters */
 /*******/
     /* executed once */
 {
-  Boolean Bool_Loc;
+  //#LIS# Start LIS Modification
+  //Boolean Bool_Loc;   //this has been made global
+  //#LIS# End LIS Modification
 
   Bool_Loc = Ch_1_Glob == 'A';
   Bool_Glob = Bool_Loc | Bool_Glob;
