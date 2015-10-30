@@ -32,8 +32,14 @@ extern  int           Int_Glob;
 extern  char          Ch_1_Glob;
 
 //#LIS# Start LIS Modification
+//Proc_6
 extern  Enumeration   Enum_Val_Par;
 extern  Enumeration   *Enum_Ref_Par;
+
+//Proc_7
+extern  One_Fifty     Int_1_Par_Val_Proc7;
+extern  One_Fifty     Int_2_Par_Val_Proc7;
+extern  One_Fifty     *Int_Par_Ref_Proc7;
 //#LIS# End LIS Modification
 
 //#LIS# Start LIS Modification
@@ -72,8 +78,9 @@ Proc_6()
   } /* switch */
 } /* Proc_6 */
 
-
-Proc_7 (Int_1_Par_Val, Int_2_Par_Val, Int_Par_Ref)
+//#LIS# Start LIS Modification
+//Proc_7 (Int_1_Par_Val, Int_2_Par_Val, Int_Par_Ref)
+Proc_7 (Int_Par_Ref)
 /**********************************************/
     /* executed three times                                      */ 
     /* first call:      Int_1_Par_Val == 2, Int_2_Par_Val == 3,  */
@@ -82,14 +89,15 @@ Proc_7 (Int_1_Par_Val, Int_2_Par_Val, Int_Par_Ref)
     /*                  Int_Par_Ref becomes 17                   */
     /* third call:      Int_1_Par_Val == 6, Int_2_Par_Val == 10, */
     /*                  Int_Par_Ref becomes 18                   */
-One_Fifty       Int_1_Par_Val;
-One_Fifty       Int_2_Par_Val;
-One_Fifty      *Int_Par_Ref;
+//One_Fifty       Int_1_Par_Val;    //this has been made global
+//One_Fifty       Int_2_Par_Val;    //this has been made global
+//One_Fifty      *Int_Par_Ref;      //this has been made global
+//#LIS# End LIS Modification
 {
   One_Fifty Int_Loc;
 
-  Int_Loc = Int_1_Par_Val + 2;
-  *Int_Par_Ref = Int_2_Par_Val + Int_Loc;
+  Int_Loc = Int_1_Par_Val_Proc7 + 2;
+  *Int_Par_Ref_Proc7 = Int_2_Par_Val_Proc7 + Int_Loc;
 } /* Proc_7 */
 
 

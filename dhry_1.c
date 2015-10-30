@@ -107,6 +107,12 @@ REG   Rec_Pointer     Next_Record;
 //### this comes from Proc_6
       Enumeration     Enum_Val_Par;
       Enumeration     *Enum_Ref_Par;
+
+//### this comes from Proc_7
+      One_Fifty       Int_1_Par_Val_Proc7;
+      One_Fifty       Int_2_Par_Val_Proc7;
+      One_Fifty       *Int_Par_Ref_Proc7;
+      One_Fifty       Int_Loc_Proc7;
 //#LIS# End LIS Modification -- Local variables that are made global
 
 
@@ -201,7 +207,13 @@ main ()
     {
       Int_3_Loc = 5 * Int_1_Loc - Int_2_Loc;
         /* Int_3_Loc == 7 */
-      Proc_7 (Int_1_Loc, Int_2_Loc, &Int_3_Loc);
+      //#LIS# Start LIS Modification
+      //Proc_7 (Int_1_Loc, Int_2_Loc, &Int_3_Loc);
+      Int_1_Par_Val_Proc7 = Int_1_Loc;
+      Int_2_Par_Val_Proc7 = Int_2_Loc;
+      Int_Par_Ref_Proc7 = &Int_3_Loc;
+      Proc_7 ();
+      //#LIS# End LIS Modification
         /* Int_3_Loc == 7 */
       Int_1_Loc += 1;
     } /* while */
@@ -395,8 +407,14 @@ Proc_1 () //### no parameters, as only global variables are used
     Proc_6();
     //#LIS# End LIS Modification
     Next_Record->Ptr_Comp = Ptr_Glob->Ptr_Comp;
-    Proc_7 (Next_Record->variant.var_1.Int_Comp, 10, 
-           &Next_Record->variant.var_1.Int_Comp);
+    //#LIS# Start LIS Modification
+    /*Proc_7 (Next_Record->variant.var_1.Int_Comp, 10, 
+           &Next_Record->variant.var_1.Int_Comp);*/
+    Int_1_Par_Val_Proc7 = Next_Record->variant.var_1.Int_Comp;
+    Int_2_Par_Val_Proc7 = 10;
+    Int_Par_Ref_Proc7 = &Next_Record->variant.var_1.Int_Comp;    
+    Proc_7();
+    //#LIS# End LIS Modification
   }
   else /* not executed */
     //#LIS# Start LIS Modification
@@ -446,7 +464,13 @@ Proc_3()
   if (Ptr_Glob != Null)
     /* then, executed */
     *Ptr_Ref_Par = Ptr_Glob->Ptr_Comp;
-  Proc_7 (10, Int_Glob, &Ptr_Glob->variant.var_1.Int_Comp);
+  //#LIS# Start LIS Modification
+  //Proc_7 (10, Int_Glob, &Ptr_Glob->variant.var_1.Int_Comp);
+  Int_1_Par_Val_Proc7 = 10;
+  Int_2_Par_Val_Proc7 = Int_Glob;
+  Int_Par_Ref_Proc7 = &Ptr_Glob->variant.var_1.Int_Comp;
+  Proc_7();
+  //#LIS# End LIS Modification
 } /* Proc_3 */
 
 
