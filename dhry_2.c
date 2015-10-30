@@ -14,7 +14,12 @@
  *
  ****************************************************************************
  */
-
+ /*
+ *#LIS#
+ *Modified by Sebastian Kroesche
+ *Date: 30.10.2015
+ *Description: Replaced local variables by global variables
+*/
 #include "dhry.h"
 
 #ifndef REG
@@ -23,17 +28,24 @@
         /* i.e. no register variables   */
 #endif
 
-extern  int     Int_Glob;
-extern  char    Ch_1_Glob;
+extern  int           Int_Glob;
+extern  char          Ch_1_Glob;
 
+//#LIS# Start LIS Modification
+extern  Enumeration   Enum_Val_Par;
+extern  Enumeration   *Enum_Ref_Par;
+//#LIS# End LIS Modification
 
-Proc_6 (Enum_Val_Par, Enum_Ref_Par)
+//#LIS# Start LIS Modification
+//Proc_6 (Enum_Val_Par, Enum_Ref_Par)
+Proc_6()
 /*********************************/
     /* executed once */
     /* Enum_Val_Par == Ident_3, Enum_Ref_Par becomes Ident_2 */
 
-Enumeration  Enum_Val_Par;
-Enumeration *Enum_Ref_Par;
+//Enumeration  Enum_Val_Par;  //this has been made global
+//Enumeration *Enum_Ref_Par;  //this has been made global
+//#LIS# End LIS Modification
 {
   *Enum_Ref_Par = Enum_Val_Par;
   if (! Func_3 (Enum_Val_Par))

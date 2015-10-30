@@ -103,6 +103,10 @@ REG   Rec_Pointer     Next_Record;
 
 //### this comes from Proc_4
       Boolean         Bool_Loc;
+
+//### this comes from Proc_6
+      Enumeration     Enum_Val_Par;
+      Enumeration     *Enum_Ref_Par;
 //#LIS# End LIS Modification -- Local variables that are made global
 
 
@@ -214,7 +218,12 @@ main ()
       if (Enum_Loc == Func_1 (Ch_Index, 'C'))
           /* then, not executed */
         {
-        Proc_6 (Ident_1, &Enum_Loc);
+        //#LIS# Start LIS Modification
+        //Proc_6 (Ident_1, &Enum_Loc);
+        Enum_Val_Par = Ident_1;
+        Enum_Ref_Par = &Enum_Loc;
+        Proc_6();
+        //#LIS# End LIS Modification
         strcpy (Str_2_Loc, "DHRYSTONE PROGRAM, 3'RD STRING");
         Int_2_Loc = Run_Index;
         Int_Glob = Run_Index;
@@ -379,8 +388,11 @@ Proc_1 () //### no parameters, as only global variables are used
     //#LIS# Start LIS Modification
     /* Proc_6 (Ptr_Val_Par->variant.var_1.Enum_Comp, 
            &Next_Record->variant.var_1.Enum_Comp); */
-    Proc_6 (Ptr_Glob->variant.var_1.Enum_Comp, 
-           &Next_Record->variant.var_1.Enum_Comp);
+    /*Proc_6 (Ptr_Glob->variant.var_1.Enum_Comp, 
+           &Next_Record->variant.var_1.Enum_Comp); */
+    Enum_Val_Par = Ptr_Glob->variant.var_1.Enum_Comp;
+    Enum_Ref_Par = &Next_Record->variant.var_1.Enum_Comp;
+    Proc_6();
     //#LIS# End LIS Modification
     Next_Record->Ptr_Comp = Ptr_Glob->Ptr_Comp;
     Proc_7 (Next_Record->variant.var_1.Int_Comp, 10, 
