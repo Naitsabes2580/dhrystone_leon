@@ -120,9 +120,15 @@ REG   Rec_Pointer     Next_Record;
       REG One_Fifty   Int_Loc_Proc8;
       int             Int_2_Par_Val_Proc8;
 
+//### this comes from Func_1
+      Capital_Letter  Ch_1_Loc_Func1;
+      Capital_Letter  Ch_2_Loc_Func1;
+
 //### this comes from Func_2
       Str_30          Str_1_Par_Ref;
       Str_30          Str_2_Par_Ref;
+      REG One_Thirty  Int_Loc_Func2;
+      Capital_Letter  Ch_Loc_Func2;
 
 //### this comes from Func_3
       Enumeration     Enum_Loc_Func3;
@@ -250,8 +256,8 @@ main ()
     //#LIS# End LIS Modification
     for (Ch_Index = 'A'; Ch_Index <= Ch_2_Glob; ++Ch_Index)
                              /* loop body executed twice */
-    {
-      if (Enum_Loc == Func_1 (Ch_Index, 'C'))
+    {      
+      if (Enum_Loc == Func_1 (Ch_Index, 'C'))     
           /* then, not executed */
         {
         //#LIS# Start LIS Modification

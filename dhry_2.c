@@ -50,10 +50,15 @@ extern  int           Int_2_Par_Val_Proc8;
 extern  REG One_Fifty Int_Index_Proc8;
 extern  REG One_Fifty Int_Loc_Proc8;
 
+//Func_1()
+extern Capital_Letter Ch_1_Loc_Func1;
+extern Capital_Letter Ch_2_Loc_Func1;
+
 //Func_2()
 extern  Str_30        Str_1_Par_Ref;
 extern  Str_30        Str_2_Par_Ref;
-
+extern  REG One_Thirty Int_Loc_Func2;
+extern  Capital_Letter Ch_Loc_Func2;
 //Func_3()
 extern  Enumeration   Enum_Loc_Func3;
 //#LIS# End LIS Modification
@@ -162,17 +167,19 @@ Enumeration Func_1 (Ch_1_Par_Val, Ch_2_Par_Val)
 Capital_Letter   Ch_1_Par_Val;
 Capital_Letter   Ch_2_Par_Val;
 {
-  Capital_Letter        Ch_1_Loc;
-  Capital_Letter        Ch_2_Loc;
+  //#LIS# Start LIS Modification
+  //Capital_Letter        Ch_1_Loc;
+  //Capital_Letter        Ch_2_Loc;
+  //#LIS# End LIS Modification
 
-  Ch_1_Loc = Ch_1_Par_Val;
-  Ch_2_Loc = Ch_1_Loc; 
-  if (Ch_2_Loc != Ch_2_Par_Val)
+  Ch_1_Loc_Func1 = Ch_1_Par_Val;
+  Ch_2_Loc_Func1 = Ch_1_Loc_Func1; 
+  if (Ch_2_Loc_Func1 != Ch_2_Par_Val)
     /* then, executed */
     return (Ident_1);
   else  /* not executed */
   {
-    Ch_1_Glob = Ch_1_Loc;
+    Ch_1_Glob = Ch_1_Loc_Func1;
     return (Ident_2);
    }
 } /* Func_1 */
@@ -190,22 +197,24 @@ Boolean Func_2 ()
 //Str_30  Str_2_Par_Ref;
 //#LIS# End LIS Modification
 {
-  REG One_Thirty        Int_Loc;
-      Capital_Letter    Ch_Loc;
+  //#LIS# Start LIS Modification
+  //REG One_Thirty        Int_Loc_Func2;
+  //    Capital_Letter    Ch_Loc;
+  //#LIS# End LIS Modification
 
-  Int_Loc = 2;
-  while (Int_Loc <= 2) /* loop body executed once */
-    if (Func_1 (Str_1_Par_Ref[Int_Loc],
-                Str_2_Par_Ref[Int_Loc+1]) == Ident_1)
+  Int_Loc_Func2 = 2;
+  while (Int_Loc_Func2 <= 2) /* loop body executed once */    
+    if (Func_1 (Str_1_Par_Ref[Int_Loc_Func2],
+                Str_2_Par_Ref[Int_Loc_Func2+1]) == Ident_1)    
       /* then, executed */
     {
-      Ch_Loc = 'A';
-      Int_Loc += 1;
+      Ch_Loc_Func2 = 'A';
+      Int_Loc_Func2 += 1;
     } /* if, while */
-  if (Ch_Loc >= 'W' && Ch_Loc < 'Z')
+  if (Ch_Loc_Func2 >= 'W' && Ch_Loc_Func2 < 'Z')
     /* then, not executed */
-    Int_Loc = 7;
-  if (Ch_Loc == 'R')
+    Int_Loc_Func2 = 7;
+  if (Ch_Loc_Func2 == 'R')
     /* then, not executed */
     return (true);
   else /* executed */
@@ -213,13 +222,13 @@ Boolean Func_2 ()
     if (strcmp (Str_1_Par_Ref, Str_2_Par_Ref) > 0)
       /* then, not executed */
     {
-      Int_Loc += 7;
-      Int_Glob = Int_Loc;
+      Int_Loc_Func2 += 7;
+      Int_Glob = Int_Loc_Func2;
       return (true);
     }
     else /* executed */
       return (false);
-  } /* if Ch_Loc */
+  } /* if Ch_Loc_Func2 */
 } /* Func_2 */
 
 //#LIS# Start LIS Modficiation
