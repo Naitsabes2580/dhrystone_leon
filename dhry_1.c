@@ -120,8 +120,13 @@ REG   Rec_Pointer     Next_Record;
       REG One_Fifty   Int_Loc_Proc8;
       int             Int_2_Par_Val_Proc8;
 
+//### this comes from Func_2
+      Str_30          Str_1_Par_Ref;
+      Str_30          Str_2_Par_Ref;
+
 //### this comes from Func_3
       Enumeration     Enum_Loc_Func3;
+
 //#LIS# End LIS Modification -- Local variables that are made global
 
 
@@ -210,7 +215,12 @@ main ()
     Int_2_Loc = 3;
     strcpy (Str_2_Loc, "DHRYSTONE PROGRAM, 2'ND STRING");
     Enum_Loc = Ident_2;
-    Bool_Glob = ! Func_2 (Str_1_Loc, Str_2_Loc);
+    //#LIS# Start LIS Modification
+    strcpy(Str_1_Par_Ref, Str_1_Loc);
+    strcpy(Str_2_Par_Ref, Str_2_Loc);
+    //Bool_Glob = ! Func_2 (Str_1_Loc, Str_2_Loc);
+    Bool_Glob = ! Func_2 ();
+    //#LIS# End LIS Modification
       /* Bool_Glob == 1 */
     while (Int_1_Loc < Int_2_Loc)  /* loop body executed once */
     {

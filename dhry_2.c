@@ -50,6 +50,10 @@ extern  int           Int_2_Par_Val_Proc8;
 extern  REG One_Fifty Int_Index_Proc8;
 extern  REG One_Fifty Int_Loc_Proc8;
 
+//Func_2()
+extern  Str_30        Str_1_Par_Ref;
+extern  Str_30        Str_2_Par_Ref;
+
 //Func_3()
 extern  Enumeration   Enum_Loc_Func3;
 //#LIS# End LIS Modification
@@ -162,7 +166,7 @@ Capital_Letter   Ch_2_Par_Val;
   Capital_Letter        Ch_2_Loc;
 
   Ch_1_Loc = Ch_1_Par_Val;
-  Ch_2_Loc = Ch_1_Loc;
+  Ch_2_Loc = Ch_1_Loc; 
   if (Ch_2_Loc != Ch_2_Par_Val)
     /* then, executed */
     return (Ident_1);
@@ -174,14 +178,17 @@ Capital_Letter   Ch_2_Par_Val;
 } /* Func_1 */
 
 
-Boolean Func_2 (Str_1_Par_Ref, Str_2_Par_Ref)
+//#LIS# Start LIS Modification
+//Boolean Func_2 (Str_1_Par_Ref, Str_2_Par_Ref)
+Boolean Func_2 ()
 /*************************************************/
     /* executed once */
     /* Str_1_Par_Ref == "DHRYSTONE PROGRAM, 1'ST STRING" */
     /* Str_2_Par_Ref == "DHRYSTONE PROGRAM, 2'ND STRING" */
 
-Str_30  Str_1_Par_Ref;
-Str_30  Str_2_Par_Ref;
+//Str_30  Str_1_Par_Ref;
+//Str_30  Str_2_Par_Ref;
+//#LIS# End LIS Modification
 {
   REG One_Thirty        Int_Loc;
       Capital_Letter    Ch_Loc;
