@@ -19,7 +19,9 @@
  *Modified by Sebastian Kroesche
  *Date: 30.10.2015
  *Description: Replaced local variables by global variables
-*/
+ *Date: 02.11.2015
+ *Description: Removed time measurement and printing of variable contents
+ */
 
 #include "dhry.h"
 
@@ -49,23 +51,27 @@ Enumeration     Func_1 ();
         Boolean Reg = true;
 #endif
 
-/* variables for time measurement: */
+ //#LIS# Start Block - Additional define for number of iterations
+ #define NUM_ITERATIONS   50000000
+ //#LIS# End Block - Additional define for number of iterations
 
-#ifdef TIMES
+/* variables for time measurement: */
+//#LIS# Start LIS Modification
+/* #ifdef TIMES
 struct tms      time_info;
 //#LIS# Start LIS Modifcation
 //extern  int     times ();
 //#LIS# End LIS Modifcation
                 /* see library function "times" */
-#define Too_Small_Time (2*HZ)
+/*#define Too_Small_Time (2*HZ)
                 /* Measurements should last at least about 2 seconds */
-#endif
+/*#endif
 #ifdef TIME
 extern long     time();
                 /* see library function "time"  */
-#define Too_Small_Time 2
+/*#define Too_Small_Time 2
                 /* Measurements should last at least 2 seconds */
-#endif
+/*#endif
 #ifdef MSC_CLOCK
 extern clock_t	clock();
 #define Too_Small_Time (2*HZ)
@@ -76,7 +82,7 @@ long            Begin_Time,
                 User_Time;
 float           Microseconds,
                 Dhrystones_Per_Second;
-
+//#LIS# End LIS Modification
 /* end of variables for time measurement */
 
 //#LIS# Start LIS Modification -- Local variables that are made global
@@ -173,7 +179,8 @@ main ()
         /* Warning: With 16-Bit processors and Number_Of_Runs > 32000,  */
         /* overflow may occur for this array element.                   */
 
-  printf ("\n");
+  //#LIS# Start LIS Modification -- Do not print anything on console
+  /*printf ("\n");
   printf ("Dhrystone Benchmark, Version 2.1 (Language: C)\n");
   printf ("\n");
   if (Reg)
@@ -186,21 +193,24 @@ main ()
     printf ("Program compiled without 'register' attribute\n");
     printf ("\n");
   }
-  printf ("Please give the number of runs through the benchmark: ");
+  //#LIS# Start LIS Modification
+  /*printf ("Please give the number of runs through the benchmark: ");
   {
     int n;
     scanf ("%d", &n);
-    Number_Of_Runs = n;
-  }
-  printf ("\n");
+    //Number_Of_Runs = n;
+  }*/
+  Number_Of_Runs = NUM_ITERATIONS;
+  //#LIS# End LIS Modification
+  /*printf ("\n");
 
   printf ("Execution starts, %d runs through Dhrystone\n", Number_Of_Runs);
-
+  //#LIS# End LIS Modification -- Do not print anything on console
   /***************/
   /* Start timer */
   /***************/
- 
-#ifdef TIMES
+//#LIS# Start LIS Modification
+/*#ifdef TIMES
   times (&time_info);
   Begin_Time = (long) time_info.tms_utime;
 #endif
@@ -209,7 +219,8 @@ main ()
 #endif
 #ifdef MSC_CLOCK
   Begin_Time = clock();
-#endif
+#endif*/
+//#LIS# End LIS Modification
 
   for (Run_Index = 1; Run_Index <= Number_Of_Runs; ++Run_Index)
   {
@@ -289,8 +300,8 @@ main ()
   /**************/
   /* Stop timer */
   /**************/
-  
-#ifdef TIMES
+//#LIS# Start LIS Modification  
+/*#ifdef TIMES
   times (&time_info);
   End_Time = (long) time_info.tms_utime;
 #endif
@@ -299,8 +310,8 @@ main ()
 #endif
 #ifdef MSC_CLOCK
   End_Time = clock();
-#endif
-
+#endif*/
+/*
   printf ("Execution ends\n");
   printf ("\n");
   printf ("Final values of the variables used in the benchmark:\n");
@@ -353,8 +364,9 @@ main ()
   printf ("Str_2_Loc:           %s\n", Str_2_Loc);
   printf ("        should be:   DHRYSTONE PROGRAM, 2'ND STRING\n");
   printf ("\n");
-
-  User_Time = End_Time - Begin_Time;
+*/
+  
+  /*User_Time = End_Time - Begin_Time;
 
   if (User_Time < Too_Small_Time)
   {
@@ -379,8 +391,8 @@ main ()
     printf ("Dhrystones per Second:                      ");
     printf ("%6.1f \n", Dhrystones_Per_Second);
     printf ("\n");
-  }
-  
+  }*/
+//#LIS# End LIS Modification  
 }
 
 //#LIS# Start LIS Modification

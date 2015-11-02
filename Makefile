@@ -23,8 +23,8 @@ PROGS=		unix			# Programs to build (UNIX)
 
 #TIME_FUNC=	-DMSC_CLOCK		# Use Microsoft clock() for measurement
 #TIME_FUNC=	-DTIME			# Use time(2) for measurement
-TIME_FUNC=	-DTIMES			# Use times(2) for measurement
-HZ=		50			# Frequency of times(2) clock ticks
+#TIME_FUNC=	-DTIMES			# Use times(2) for measurement
+#HZ=		50			# Frequency of times(2) clock ticks
 #HZ=		60			# Frequency of times(2) clock ticks
 #HZ=		100			# Frequency of times(2) clock ticks
 #HZ=		1			# Give bogus result unless changed!
@@ -41,8 +41,12 @@ GCCOPTIM=       -O
 
 LFLAGS=					#Loader Flags
 
-CFLAGS=	$(OPTIMIZE) $(TIME_FUNC) -DHZ=$(HZ) $(ENUMS) $(STRUCTASSIGN) $(CFL)
-GCCFLAGS= $(GCCOPTIM) $(TIME_FUNC) -DHZ=$(HZ) $(ENUMS) $(STRUCTASSIGN) $(CFL)
+##LIS# Start LIS Modification
+#CFLAGS=	$(OPTIMIZE) $(TIME_FUNC) -DHZ=$(HZ) $(ENUMS) $(STRUCTASSIGN) $(CFL)
+#GCCFLAGS= $(GCCOPTIM) $(TIME_FUNC) -DHZ=$(HZ) $(ENUMS) $(STRUCTASSIGN) $(CFL)
+CFLAGS=	$(OPTIMIZE) $(ENUMS) $(STRUCTASSIGN) $(CFL)
+GCCFLAGS= $(GCCOPTIM) $(ENUMS) $(STRUCTASSIGN) $(CFL)
+##LIS# End LIS Modification
 
 #
 #		You shouldn't need to touch the rest
