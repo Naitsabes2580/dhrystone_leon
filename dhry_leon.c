@@ -379,6 +379,7 @@
 #include <stdio.h>
 //#LIS# Start LIS Modification
 #include <string.h>  /* for strcpy, strcmp */
+#include <stdlib.h>  /* for malloc */
 //#LIS# End LIS Modification
 #define Null 0 
                 /* Value of a Null pointer */
@@ -439,7 +440,9 @@ typedef struct record
  *Date: 30.10.2015
  *Description: Replaced local variables by global variables
  *Date: 02.11.2015
- *Description: Removed time measurement and printing of variable contents
+ *Description: Removed time measurement; printing of results can be activated 
+ *			   when PRINT_RESULTS is defined
+ *			   
  */
  /* Global Variables: */
 
@@ -467,9 +470,10 @@ Enumeration     Func_1 ();
         Boolean Reg = true;
 #endif
 
- //#LIS# Start Block - Additional define for number of iterations
+ //#LIS# Start Block - Additional defines
  #define NUM_ITERATIONS   1
- //#LIS# End Block - Additional define for number of iterations
+ //#define PRINT_RESULTS
+ //#LIS# End Block - Additional defines
 
 /* variables for time measurement: */
 //#LIS# Start LIS Modification
@@ -922,7 +926,7 @@ main ()
 #ifdef MSC_CLOCK
   End_Time = clock();
 #endif*/
-
+#ifdef PRINT_RESULTS
   printf ("Execution ends\n");
   printf ("\n");
   printf ("Final values of the variables used in the benchmark:\n");
@@ -975,7 +979,7 @@ main ()
   printf ("Str_2_Loc:           %s\n", Str_2_Loc);
   printf ("        should be:   DHRYSTONE PROGRAM, 2'ND STRING\n");
   printf ("\n");
-
+#endif
   
   /*User_Time = End_Time - Begin_Time;
 
